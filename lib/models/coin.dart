@@ -25,8 +25,8 @@ class Coin {
         usdMap['price'] as double,
         outputFormat
             .format(inputFormat.parse(usdMap['last_updated'] as String)),
-        usdMap['percent_change_24h'],
-        json['cmc_rank'],
+        usdMap['percent_change_24h'].runtimeType==int?(usdMap['percent_change_24h'] as int).toDouble(): usdMap['percent_change_24h'],
+        json['cmc_rank']??0,
         json['symbol'],
         tags);
   }

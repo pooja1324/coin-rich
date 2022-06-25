@@ -1,4 +1,5 @@
-import 'package:crypto_app/coin_list/coins_list_screen.dart';
+import 'package:crypto_app/coin_list/coins_data_bloc.dart';
+import 'package:crypto_app/coin_list/coins_data_screen.dart';
 import 'package:crypto_app/colors.dart';
 import 'package:crypto_app/search_coins/search_coins_bloc.dart';
 import 'package:crypto_app/search_coins/search_coins_event.dart';
@@ -6,6 +7,7 @@ import 'package:crypto_app/search_coins/search_coins_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+///[SearchCoinsScreen] screen shows UI to search coins
 class SearchCoinsScreen extends StatefulWidget {
   const SearchCoinsScreen({Key? key}) : super(key: key);
 
@@ -31,7 +33,8 @@ class _SearchCoinsState extends State<SearchCoinsScreen> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => CoinsListScreen(state.coins)));
+                  builder: (context) => BlocProvider(
+                      create: (context) => CoinsDataBloc(), child:CoinsDataScreen(state.coins))));
         } else if (state is CoinSearchFailedState) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text(state.reason),
